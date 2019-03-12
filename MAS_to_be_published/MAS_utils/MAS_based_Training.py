@@ -57,7 +57,7 @@ class Weight_Regularized_SGD(optim.SGD):
             for p in group['params']:
                 if p.grad is None:
                     continue
-                d_p = p.grad.data
+                d_p = p.grad.data  # derivative of Loss w.r.t theta's
                
                 #MAS PART CODE GOES HERE
                 #if this param has an omega to use for regulization
@@ -67,9 +67,9 @@ class Weight_Regularized_SGD(optim.SGD):
                     #get omega for this parameter
                     omega=reg_param.get('omega')
                     #initial value when the training start
-                    init_val=reg_param.get('init_val')
+                    init_val=reg_param.get('init_val') #theta*_{i,j}
                     
-                    curr_wegiht_val=p.data
+                    curr_wegiht_val=p.data #theta_{i,j}
                     #move the tensors to cuda
                     init_val=init_val.cuda()
                     omega=omega.cuda()
